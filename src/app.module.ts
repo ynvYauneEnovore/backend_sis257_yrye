@@ -3,8 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CancionModule } from './cancion/cancion.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
+import { GeneroModule } from './genero/genero.module';
 
 @Module({
   imports: [
@@ -20,8 +22,10 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       autoLoadEntities: true,
     }),
-    UsuarioModule,
     AuthModule,
+    GeneroModule,
+    UsuarioModule,
+    CancionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
