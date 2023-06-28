@@ -4,9 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CancionModule } from './cancion/cancion.module';
+import { ProductoModule } from './producto/producto.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { GeneroModule } from './genero/genero.module';
+import { CatProductoModule } from './catproducto/catproducto.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { GeneroModule } from './genero/genero.module';
     GeneroModule,
     UsuarioModule,
     CancionModule,
+    ProductoModule,
+    CatProductoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
