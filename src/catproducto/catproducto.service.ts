@@ -16,15 +16,15 @@ export class GeneroService {
     createCatProductoDto: CreateCatProductoDto,
   ): Promise<CatProductoEntity> {
     const existe = await this.generoRepository.findOneBy({
-      descripcion: createCatProductoDto.descripcion.trim(),
+      nombre: createCatProductoDto.nombre.trim(),
     });
 
     if (existe) {
-      throw new ConflictException(`El género ${createCatProductoDto.descripcion} ya existe.`);
+      throw new ConflictException(`El género ${createCatProductoDto.nombre} ya existe.`);
     }
 
     return this.generoRepository.save({
-      descripcion: createCatProductoDto.descripcion.trim(),
+      nombre: createCatProductoDto.nombre.trim(),
     });
   }
 

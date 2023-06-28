@@ -7,7 +7,7 @@ export class CatProductoEntity {
   id: number;
 
   @Column({ length: 100 })
-  descripcion: string;
+  nombre: string;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
