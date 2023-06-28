@@ -1,12 +1,11 @@
-import { GeneroEntity } from "src/genero/entities/genero.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ProductoEntity } from "src/producto/entities/producto.entity";
 
-@Entity('canciones')
-export class CancionEntity {
+@Entity('ventadetalles')
+export class VentaDetalleEntity {
   @PrimaryGeneratedColumn() id: number;
 
-
-  @Column({ name: 'id_genero' }) idGenero: number;
+  @Column({ name: 'id_ventadetalle' }) idVentaDetalle: number;
 
   @Column() nombre: string;
   
@@ -20,7 +19,8 @@ export class CancionEntity {
 
   @UpdateDateColumn({ name: 'fecha_modificacion' }) fechaModificacion: Date;
 
-  @ManyToOne(() => GeneroEntity, (genero) => genero.canciones)
-  @JoinColumn({ name: 'id_genero', referencedColumnName: 'id' })
-  genero: GeneroEntity;
+  @ManyToOne(() => ProductoEntity, (producto) => producto.ventadetalle)
+  @JoinColumn({ name: 'id_ventadetalle', referencedColumnName: 'id' })
+  producto: ProductoEntity;
+
 }

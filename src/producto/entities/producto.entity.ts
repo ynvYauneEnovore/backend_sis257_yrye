@@ -1,10 +1,10 @@
 import { CatProductoEntity } from "src/catproducto/entities/catproducto.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { VentaDetalleEntity } from "src/ventadetalle/entities/ventadetalle.entity";
+import { Column, OneToMany, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('producto')
 export class ProductoEntity {
   @PrimaryGeneratedColumn() id: number;
-
 
   @Column({ name: 'id_genero' }) idGenero: number;
 
@@ -23,4 +23,8 @@ export class ProductoEntity {
   @ManyToOne(() => CatProductoEntity, (catproducto) => catproducto.producto)
   @JoinColumn({ name: 'id_genero', referencedColumnName: 'id' })
   catproducto: CatProductoEntity;
+
+  @OneToMany(() => VentaDetalleEntity, (ventadetalle) => ventadetalle.producto)
+  ventadetalle: VentaDetalleEntity[];
+
 }

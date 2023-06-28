@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import { CancionService } from './cancion.service';
-import { CreateCancionDto } from './dto/create-cancion.dto';
-import { UpdateCancionDto } from './dto/update-cancion.dto';
+import { VentaDetalleService } from './ventadetalle.service';
+import { CreateVentaDetalleDto } from './dto/create-ventadetalle.dto';
+import { UpdateVentaDetalleDto } from './dto/update-ventadetalle.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
@@ -9,11 +9,11 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('canciones')
-export class CancionController {
-  constructor(private readonly cancionService: CancionService) {}
+export class VentaDetalleController {
+  constructor(private readonly cancionService: VentaDetalleService) {}
 
   @Post()
-  create(@Body() createCancionDto: CreateCancionDto) {
+  create(@Body() createCancionDto: CreateVentaDetalleDto) {
     return this.cancionService.create(createCancionDto);
   }
 
@@ -28,7 +28,7 @@ export class CancionController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCancionDto: UpdateCancionDto) {
+  update(@Param('id') id: string, @Body() updateCancionDto: UpdateVentaDetalleDto) {
     return this.cancionService.update(+id, updateCancionDto);
   }
 

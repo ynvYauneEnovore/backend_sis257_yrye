@@ -3,11 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CancionModule } from './cancion/cancion.module';
 import { ProductoModule } from './producto/producto.module';
+import { VentaDetalleModule } from './ventadetalle/ventadetalle.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
-import { GeneroModule } from './genero/genero.module';
 import { CatProductoModule } from './catproducto/catproducto.module';
 
 @Module({
@@ -25,11 +24,10 @@ import { CatProductoModule } from './catproducto/catproducto.module';
       autoLoadEntities: true,
     }),
     AuthModule,
-    GeneroModule,
     UsuarioModule,
-    CancionModule,
     ProductoModule,
     CatProductoModule,
+    VentaDetalleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
