@@ -1,26 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { CreateVentaDto } from './dto/create-cliente.dto';
-import { UpdateVentaDto } from './dto/update-cliente.dto';
+import { CreateClienteDto } from './dto/create-cliente.dto';
+import { UpdateClienteDto } from './dto/update-cliente.dto';
 
 @Injectable()
 export class ClienteService {
-  create(createCancionDto: CreateVentaDto) {
-    return 'This action adds a new cancion';
+  create(createClienteDto: CreateClienteDto) {
+    return 'Esta acción añade una nueva canción.';
   }
 
   findAll() {
-    return `This action returns all cancion`;
+    return `Esta acción devuelve toda la canción.`;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} cancion`;
+    return `Esta acción devuelve una canción por #${id}`;
   }
 
-  update(id: number, updateCancionDto: UpdateVentaDto) {
+  update(id: number, updateClienteDto: UpdateClienteDto) {
     return `This action updates a #${id} cancion`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} cancion`;
+    return `Esta acción elimina una canción #${id}`;
   }
 }

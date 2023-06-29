@@ -1,26 +1,66 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCancionDto } from './dto/create-producto.dto';
-import { UpdateCancionDto } from './dto/update-producto.dto';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { CreateProductoDto } from './dto/create-producto.dto';
+import { UpdateProductoDto } from './dto/update-producto.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ProductoEntity } from './entities/producto.entity';
+import { Repository } from 'typeorm';
+
 
 @Injectable()
-export class CancionService {
-  create(createCancionDto: CreateCancionDto) {
-    return 'This action adds a new cancion';
+export class ProductoService {
+  constructor(
+    @InjectRepository(ProductoEntity)
+    private productoRepository: Repository<ProductoEntity>,
+  ) {}
+
+  async create(
+    createProductoDto: CreateProductoDto,
+  ): Promise<ProductoEntity> {
+    const existe = await this.productoRepository.findOneBy({
+      nombre: createProductoDto.nombre.trim(),
+    });
+
+    if (existe) {
+      throw new ConflictException(`El género ${createProductoDto.nombre} ya existe.`);
+    }
+
+    return this.productoRepository.save({
+      nombre: createProductoDto.nombre.trim(),
+    });
   }
 
-  findAll() {
-    return `This action returns all cancion`;
+  async findAll(): Promise<ProductoEntity[]> {
+    return this.productoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cancion`;
+  async findOne(id: number): Promise<ProductoEntity> {
+    const catproducto = await this.productoRepository.findOneBy({id});
+
+    if (!catproducto) {
+      throw new NotFoundException(`El género ${id} no existe.`);
+    }
+
+    return catproducto;
   }
 
-  update(id: number, updateCancionDto: UpdateCancionDto) {
-    return `This action updates a #${id} cancion`;
+  async update(id: number, updateProductoDto: UpdateProductoDto) {
+    const catproducto = await this.productoRepository.findOneBy({id});
+
+    if (!catproducto) {
+      throw new NotFoundException(`El género ${id} no existe.`);
+    }
+
+    const catproductoUpdate = Object.assign(catproducto, updateProductoDto);
+    return this.productoRepository.save(catproductoUpdate);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cancion`;
+  async remove(id: number) {
+    const existe = await this.productoRepository.findOneBy({id});
+
+    if (!existe) {
+      throw new NotFoundException(`El género ${id} no existe.`);
+    }
+
+    return this.productoRepository.delete(id);
   }
 }

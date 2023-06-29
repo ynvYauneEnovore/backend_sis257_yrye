@@ -5,7 +5,7 @@ import { UpdateVentaDetalleDto } from './dto/update-ventadetalle.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@ApiTags('canciones')
+@ApiTags('DETALLES DE LA VENTA')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('canciones')

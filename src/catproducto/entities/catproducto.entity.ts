@@ -15,6 +15,5 @@ export class CatProductoEntity {
   @UpdateDateColumn({ name: 'fecha_modificacion' })
   fechaModificacion: Date;
 
-  @OneToMany(() => ProductoEntity, (producto) => producto.catproducto)
-  producto: ProductoEntity[];
+
 }

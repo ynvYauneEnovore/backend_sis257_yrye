@@ -6,7 +6,6 @@ import { Column, OneToMany, CreateDateColumn, Entity, JoinColumn, ManyToOne, Pri
 export class ProductoEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ name: 'id_catproducto' }) idCatProducto: number;
 
   @Column() nombre: string;
   
@@ -18,6 +17,9 @@ export class ProductoEntity {
 
   @Column() imagen: string;
 
+  @Column() catproducto: string;
+
+
   @Column() min: string;
 
   @Column() max: string;
@@ -28,9 +30,7 @@ export class ProductoEntity {
 
   @UpdateDateColumn({ name: 'fecha_modificacion' }) fechaModificacion: Date;
 
-  @ManyToOne(() => CatProductoEntity, (catproducto) => catproducto.producto)
-  @JoinColumn({ name: 'id_catproducto', referencedColumnName: 'id' })
-  catproducto: CatProductoEntity;
+
 
   @OneToMany(() => VentaDetalleEntity, (ventadetalle) => ventadetalle.producto)
   ventadetalle: VentaDetalleEntity[];

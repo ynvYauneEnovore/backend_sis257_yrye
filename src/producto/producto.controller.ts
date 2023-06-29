@@ -1,39 +1,45 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import { CancionService } from './producto.service';
-import { CreateCancionDto } from './dto/create-producto.dto';
-import { UpdateCancionDto } from './dto/update-producto.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ProductoService } from './producto.service';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CreateProductoDto } from './dto/create-producto.dto';
+import { UpdateProductoDto } from './dto/update-producto.dto';
+import { ProductoEntity } from './entities/producto.entity';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@ApiTags('canciones')
+@ApiTags('PRODUCTOS')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
-@Controller('canciones')
-export class CancionController {
-  constructor(private readonly cancionService: CancionService) {}
+@Controller('producto') // Corregir el nombre del endpoint a 'productos'
+export class ProductoController {
+  constructor(private readonly productoService: ProductoService) {}
 
   @Post()
-  create(@Body() createCancionDto: CreateCancionDto) {
-    return this.cancionService.create(createCancionDto);
+  @ApiCreatedResponse({ type: ProductoEntity })
+  create(@Body() createProductoDto: CreateProductoDto) { // Corregir el nombre del DTO
+    return this.productoService.create(createProductoDto);
   }
 
   @Get()
+  @ApiOkResponse({ type: ProductoEntity, isArray: true })
   findAll() {
-    return this.cancionService.findAll();
+    return this.productoService.findAll();
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: ProductoEntity })
   findOne(@Param('id') id: string) {
-    return this.cancionService.findOne(+id);
+    return this.productoService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCancionDto: UpdateCancionDto) {
-    return this.cancionService.update(+id, updateCancionDto);
+  @ApiOkResponse({ type: ProductoEntity })
+  update(@Param('id') id: string, @Body() updateProductoDto: UpdateProductoDto) { // Corregir el nombre del DTO
+    return this.productoService.update(+id, updateProductoDto);
   }
 
   @Delete(':id')
+  @ApiOkResponse({ type: ProductoEntity })
   remove(@Param('id') id: string) {
-    return this.cancionService.remove(+id);
+    return this.productoService.remove(+id);
   }
 }

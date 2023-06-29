@@ -6,7 +6,7 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nest
 import { CatProductoEntity } from './entities/catproducto.entity';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@ApiTags('catproducto')
+@ApiTags('CATEGORÍA PRODUCTO  ')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('catproducto')

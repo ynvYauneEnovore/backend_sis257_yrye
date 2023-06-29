@@ -5,10 +5,10 @@ import { UpdateVentaDto } from './dto/update-venta.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-@ApiTags('canciones')
+@ApiTags('VENTA')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
-@Controller('canciones')
+@Controller('venta')
 export class VentaController {
   constructor(private readonly cancionService: VentaService) {}
 
