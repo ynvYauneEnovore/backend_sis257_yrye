@@ -8,6 +8,8 @@ import { VentaDetalleModule } from './ventadetalle/ventadetalle.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { CatProductoModule } from './catproducto/catproducto.module';
+import { VentaModule } from './venta/venta.module';
+import { ClienteModule } from './cliente/cliente.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { CatProductoModule } from './catproducto/catproducto.module';
     ProductoModule,
     CatProductoModule,
     VentaDetalleModule,
+    VentaModule,
+    ClienteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
