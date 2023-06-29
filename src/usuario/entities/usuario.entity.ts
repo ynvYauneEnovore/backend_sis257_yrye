@@ -23,12 +23,6 @@ export class UsuarioEntity {
   @Column({ length: 50 })
   email: string;
 
-  @Column({ length: 50 })
-  celular: string;
-
-  @Column({ name: 'fecha_nacimineto' })
-  nacimiento: Date;
-
   @Column({ length: 20 })
   rol: string;
 

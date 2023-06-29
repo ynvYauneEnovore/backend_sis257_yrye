@@ -6,16 +6,16 @@ import { CatProductoEntity } from './entities/catproducto.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class GeneroService {
+export class CatProductoService {
   constructor(
     @InjectRepository(CatProductoEntity)
-    private generoRepository: Repository<CatProductoEntity>,
+    private catproductoRepository: Repository<CatProductoEntity>,
   ) {}
 
   async create(
     createCatProductoDto: CreateCatProductoDto,
   ): Promise<CatProductoEntity> {
-    const existe = await this.generoRepository.findOneBy({
+    const existe = await this.catproductoRepository.findOneBy({
       nombre: createCatProductoDto.nombre.trim(),
     });
 
@@ -23,43 +23,43 @@ export class GeneroService {
       throw new ConflictException(`El género ${createCatProductoDto.nombre} ya existe.`);
     }
 
-    return this.generoRepository.save({
+    return this.catproductoRepository.save({
       nombre: createCatProductoDto.nombre.trim(),
     });
   }
 
   async findAll(): Promise<CatProductoEntity[]> {
-    return this.generoRepository.find();
+    return this.catproductoRepository.find();
   }
 
   async findOne(id: number): Promise<CatProductoEntity> {
-    const genero = await this.generoRepository.findOneBy({id});
+    const catproducto = await this.catproductoRepository.findOneBy({id});
 
-    if (!genero) {
+    if (!catproducto) {
       throw new NotFoundException(`El género ${id} no existe.`);
     }
 
-    return genero;
+    return catproducto;
   }
 
   async update(id: number, updateCatProductoDto: UpdateCatProductoDto) {
-    const genero = await this.generoRepository.findOneBy({id});
+    const catproducto = await this.catproductoRepository.findOneBy({id});
 
-    if (!genero) {
+    if (!catproducto) {
       throw new NotFoundException(`El género ${id} no existe.`);
     }
 
-    const generoUpdate = Object.assign(genero, updateCatProductoDto);
-    return this.generoRepository.save(generoUpdate);
+    const catproductoUpdate = Object.assign(catproducto, updateCatProductoDto);
+    return this.catproductoRepository.save(catproductoUpdate);
   }
 
   async remove(id: number) {
-    const existe = await this.generoRepository.findOneBy({id});
+    const existe = await this.catproductoRepository.findOneBy({id});
 
     if (!existe) {
       throw new NotFoundException(`El género ${id} no existe.`);
     }
 
-    return this.generoRepository.delete(id);
+    return this.catproductoRepository.delete(id);
   }
 }
